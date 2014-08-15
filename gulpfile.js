@@ -11,9 +11,11 @@
 // Dependencies
 // ========================================================================
 var fs = require('fs');
+var path = require('path');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var notify = require('gulp-notify');
+var less = require('gulp-less');
 var sass = require('gulp-ruby-sass');
 var jshint = require("gulp-jshint");
 var concat = require("gulp-concat");
@@ -40,7 +42,13 @@ var paths = {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-less
  */
 gulp.task('min-styles-less', function() {
-
+    return gulp.src(paths.src + '/less/main.less')
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }).on('error', gutil.log))
+        .pipe(rename('main.css'))
+        .pipe(gulp.dest(paths.dist + '/theme/resources/css'))
+        .pipe(notify('Sass compiled'));
 });
 
 

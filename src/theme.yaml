@@ -1,0 +1,7 @@
+---
+name: 'Your Theme Name'
+author: 'You / Your Company'
+website: 'http://yoururl.com/'
+engine: twig
+404: '404'
+---

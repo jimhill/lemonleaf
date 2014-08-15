@@ -90,6 +90,14 @@ Compiles and compresses any 3rd party vendor JavaScript files found in `src/js/v
 
 ---
 
+### build
+
+`$ gulp build`
+
+When you want to compile everything into the dist folder, including fonts, images etc use this.
+
+---
+
 ### lemonsync-config
 
 `$ gulp lemonsync-config`

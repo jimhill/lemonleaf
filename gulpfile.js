@@ -124,6 +124,16 @@ gulp.task('min-scripts', ['min-scripts-js', 'min-vendor-scripts-js']);
 
 
 /**
+ * build
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#build
+ */
+gulp.task('build', function() {
+    
+});
+
+
+/**
  * lemonsync-config
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#lemonsync-config

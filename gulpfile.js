@@ -22,32 +22,16 @@ var rename = require("gulp-rename");
 var gzip = require("gulp-gzip");
 
 
-// Variables
+// Config
 // ========================================================================
-var srcSassDir = './app/assets/src/sass';
-var srcCssDir = './app/assets/src/css';
-var srcJsDir = './app/assets/src/js';
-var srcFontsDir = './app/assets/src/fonts';
-var srcImagesDir = './app/assets/src/img';
-var distDir = './app/assets/dist/';
-var distCssDir = './app/assets/dist/css';
-var distJsDir = './app/assets/dist/js';
-var distFontsDir = './app/assets/dist/fonts';
-var distImagesDir = './app/assets/dist/img';
+var paths = {
+    src: './src',
+    dist: './dist'
+};
 
 
 // Tasks
 // ========================================================================
-
-
-/**
- * min-styles
- *
- * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles
- */
-gulp.task('min-styles', function() {
-    
-});
 
 
 /**
@@ -56,7 +40,7 @@ gulp.task('min-styles', function() {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-less
  */
 gulp.task('min-styles-less', function() {
-    
+
 });
 
 
@@ -66,8 +50,21 @@ gulp.task('min-styles-less', function() {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-sass
  */
 gulp.task('min-styles-sass', function() {
-    
+    return gulp.src(paths.src + '/scss/main.scss')
+        .pipe(sass().on('error', gutil.log))
+        .pipe(rename('main.css'))
+        .pipe(gulp.dest(paths.dist + '/theme/resources/css'))
+        .pipe(notify('Sass compiled'));
 });
+
+
+/**
+ * min-styles
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles
+ */
+gulp.task('min-styles', ['min-styles-less']);
+//gulp.task('min-styles', ['min-styles-sass']);
 
 
 /**

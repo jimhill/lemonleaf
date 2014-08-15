@@ -10,26 +10,35 @@
 
 // Dependencies
 // ========================================================================
-var fs = require('fs');
-var path = require('path');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var notify = require('gulp-notify');
-var less = require('gulp-less');
-var sass = require('gulp-ruby-sass');
-var jshint = require("gulp-jshint");
-var concat = require("gulp-concat");
-var uglify = require("gulp-uglify");
-var rename = require("gulp-rename");
-var gzip = require("gulp-gzip");
+var fs = require('fs'),
+    path = require('path'),
+    gulp = require('gulp'),
+    gutil = require('gulp-util'),
+    notify = require('gulp-notify'),
+    less = require('gulp-less'),
+    sass = require('gulp-ruby-sass'),
+    jshint = require("gulp-jshint"),
+    concat = require("gulp-concat"),
+    uglify = require("gulp-uglify"),
+    rename = require("gulp-rename");
 
-
-// Config
+// Path config
 // ========================================================================
 var paths = {
-    src: './src',
-    dist: './dist'
-};
+        src: path.join(__dirname, 'src'),
+        dist: path.join(__dirname, 'dist'),
+    },
+    srcJs = path.join(paths.src, 'js'),
+    srcVendorsJs = path.join(paths.src, 'js', 'vendors/');
+
+// JavaScript files so they are concatenated in the correct order
+// ========================================================================
+var scripts = [
+        path.join(srcJs, 'main.js'),
+    ],
+    vendorScripts = [
+        path.join(srcVendorsJs, 'example.js'),
+    ];
 
 
 // Tasks
@@ -42,13 +51,11 @@ var paths = {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-less
  */
 gulp.task('min-styles-less', function() {
-    return gulp.src(paths.src + '/less/main.less')
-        .pipe(less({
-            paths: [ path.join(__dirname, 'less', 'includes') ]
-        }).on('error', gutil.log))
+    return gulp.src( path.join(paths.src, 'less', 'main.less') )
+        .pipe(less().on('error', gutil.log))
         .pipe(rename('main.css'))
-        .pipe(gulp.dest(paths.dist + '/theme/resources/css'))
-        .pipe(notify('Sass compiled'));
+        .pipe(gulp.dest( path.join(paths.dist, 'theme', 'resources', 'css') ))
+        .pipe(notify('Less compiled'));
 });
 
 
@@ -58,10 +65,10 @@ gulp.task('min-styles-less', function() {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-sass
  */
 gulp.task('min-styles-sass', function() {
-    return gulp.src(paths.src + '/scss/main.scss')
+    return gulp.src( path.join(paths.src, 'scss', 'main.scss') )
         .pipe(sass().on('error', gutil.log))
         .pipe(rename('main.css'))
-        .pipe(gulp.dest(paths.dist + '/theme/resources/css'))
+        .pipe(gulp.dest( path.join(paths.dist, 'theme', 'resources', 'css') ))
         .pipe(notify('Sass compiled'));
 });
 
@@ -76,23 +83,44 @@ gulp.task('min-styles', ['min-styles-less']);
 
 
 /**
- * min-scripts
- *
- * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-scripts
- */
-gulp.task('min-scripts', function() {
-    
-});
-
-
-/**
  * min-scripts-js
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-scripts-js
  */
 gulp.task('min-scripts-js', function() {
-    
+    return gulp.src(scripts)
+        .pipe(jshint())
+        .pipe(jshint.reporter("default"))
+        .pipe(concat('main.js'))
+        .pipe(uglify())
+        .pipe(rename('main.min.js'))
+        .pipe(gulp.dest( path.join(paths.dist, 'theme', 'resources', 'js') ))
+        .pipe(notify('JS compiled and compressed for distribution'));
 });
+
+/**
+ * min-vendor-scripts-js
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-vendor-scripts-js
+ */
+gulp.task('min-vendor-scripts-js', function() {
+    return gulp.src(vendorScripts)
+        .pipe(jshint())
+        .pipe(jshint.reporter("default"))
+        .pipe(concat('vendors.js'))
+        .pipe(uglify())
+        .pipe(rename('vendors.min.js'))
+        .pipe(gulp.dest( path.join(paths.dist, 'theme', 'resources', 'js') ))
+        .pipe(notify('Vendors JS compiled and compressed for distribution'));
+});
+
+
+/**
+ * min-scripts
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-scripts
+ */
+gulp.task('min-scripts', ['min-scripts-js', 'min-vendor-scripts-js']);
 
 
 /**

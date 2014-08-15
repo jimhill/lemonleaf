@@ -1,20 +1,7 @@
 # Application #
 ###################
-/app/config/packages/*
-/app/assets/src/sass/bourbon
-/bootstrap/compiled.php
 /node_modules
-/report
-/vendor
-
-composer.phar
-composer.lock
-.env.*.php
-.env.php
-.DS_Store
-Thumbs.db
 .sass-cache
-CONTRIBUTING.md
 
 # Compiled source #
 ###################

@@ -84,4 +84,4 @@ This is not an officially supported repository and has been prepared by me to si
 
 ## License
 
-Feel free to use this however you wish. Code released under the [MIT license](github.com/jimhill/lemonleaf/blob/master/LICENSE).
+Feel free to use this however you wish. Code released under the [MIT license](http://github.com/jimhill/lemonleaf/blob/master/LICENSE).

@@ -26,11 +26,15 @@ You can manipulate the `gulpfile.js` file to suit your needs. Everything in ther
 
 ## Gulp tasks
 
+### default
+
 `$ gulp`
 
 By default this simply calls the *watch* task.
 
 ---
+
+### watch
 
 `$ gulp watch`
 
@@ -38,11 +42,15 @@ This default action *watches* changes in files within the `src` directory and ru
 
 ---
 
+### min-styles
+
 `$ gulp min-styles`
 
 This triggers *min-styles-less* by default. You can configure this to suit your needs. You will see that *min-styles-sass* is available simply by uncommenting.
 
 ---
+
+### min-styles-less
 
 `$ gulp min-styles-less`
 
@@ -50,11 +58,15 @@ Compiles and compresses the [less](http://lesscss.org/) files found in `src/less
 
 ---
 
+### min-styles-sass
+
 `$ gulp min-styles-sass`
 
 Compiles and compresses the [Sass](http://sass-lang.com/) files found in `src/less` and contatenates them into `dist/theme/css/main.css`. Listens for file `.scss` file extensions by default.
 
 ---
+
+### min-scripts
 
 `$ gulp min-scripts`
 
@@ -62,11 +74,15 @@ This triggers *min-scripts-js* by default. You can configure this to suit your n
 
 ---
 
+### min-scripts-js
+
 `$ gulp min-scripts-js`
 
 Compiles and compresses the JavaScript files found in `src/js` and contatenates them into `dist/theme/js/main.js`.
 
 ---
+
+### lemonsync-config
 
 `$ gulp lemonsync-config`
 
@@ -74,9 +90,13 @@ This simply places a boilerplate `lemonsync.cfg` in the root directory. If you h
 
 ---
 
+### zip
+
 `$ gulp zip`
 
 This task simply creates `dist/theme.zip` containing the contents of the `dist/theme` directory. This can then be uploaded via the LemonStand backend interface.
+
+---
 
 ## Support
 

@@ -1,4 +1,15 @@
-// Libraries
+/* ========================================================================
+ * LemonLeaf
+ *
+ * A quickstart environment for LemonStand theme development 
+ * https://github.com/jimhill/lemonleaf
+ * ========================================================================
+ * Licensed under MIT (https://github.com/jimhill/lemonleaf/blob/master/LICENSE)
+ * ======================================================================== */
+
+
+// Dependencies
+// ========================================================================
 var fs = require('fs');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -10,7 +21,9 @@ var uglify = require("gulp-uglify");
 var rename = require("gulp-rename");
 var gzip = require("gulp-gzip");
 
+
 // Variables
+// ========================================================================
 var srcSassDir = './app/assets/src/sass';
 var srcCssDir = './app/assets/src/css';
 var srcJsDir = './app/assets/src/js';
@@ -22,57 +35,94 @@ var distJsDir = './app/assets/dist/js';
 var distFontsDir = './app/assets/dist/fonts';
 var distImagesDir = './app/assets/dist/img';
 
-// Development Sass
-gulp.task('dev-sass', function() {
-    return gulp.src(srcSassDir + '/main.scss')
-        .pipe(sass().on('error', gutil.log))
-        .pipe(rename('main.css'))
-        .pipe(gulp.dest(srcCssDir))
-        .pipe(notify('Sass compiled'));
+
+// Tasks
+// ========================================================================
+
+
+/**
+ * min-styles
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles
+ */
+gulp.task('min-styles', function() {
+    
 });
 
-// Development Javascript
-// TODO
 
-// Build Sass and CSS
-gulp.task('build-sass', function() {
-    return gulp.src(srcSassDir + '/main.scss')
-        .pipe(sass({
-            style: 'compressed'
-        }).on('error', gutil.log))
-        .pipe(gzip())
-        .pipe(rename('master.min.css'))
-        .pipe(gulp.dest(distCssDir))
-        .pipe(notify('Sass compiled and compressed for distribution'));
+/**
+ * min-styles-less
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-less
+ */
+gulp.task('min-styles-less', function() {
+    
 });
 
-// Build: Concatenate & Minify JS
-gulp.task('build-js', function() {
-    gulp.src([srcJsDir + '/plugins.min.js'])
-        .pipe(gzip())
-        .pipe(rename(function(path) {
-            path.extname = ""
-        }))
-        .pipe(gulp.dest(distJsDir));
 
-    return gulp.src([srcJsDir + '/*.js', '!' + srcJsDir + '/plugins.min.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter("default"))
-        .pipe(concat('master.min.js'))
-        .pipe(uglify())
-        .pipe(gzip())
-        .pipe(rename('master.min.js'))
-        .pipe(gulp.dest(distJsDir))
-        .pipe(notify('JS compiled and compressed for distribution'));
+/**
+ * min-styles-sass
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-sass
+ */
+gulp.task('min-styles-sass', function() {
+    
 });
 
-// Build tasks
-gulp.task('build', ['build-sass', 'build-js', 'build-fonts', 'build-images']);
 
-// Watch tasks
+/**
+ * min-scripts
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-scripts
+ */
+gulp.task('min-scripts', function() {
+    
+});
+
+
+/**
+ * min-scripts-js
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-scripts-js
+ */
+gulp.task('min-scripts-js', function() {
+    
+});
+
+
+/**
+ * lemonsync-config
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#lemonsync-config
+ */
+gulp.task('lemonsync-config', function() {
+    
+});
+
+
+/**
+ * zip
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#zip
+ */
+gulp.task('zip', function() {
+    
+});
+
+
+/**
+ * watch
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#watch
+ */
 gulp.task('watch', function() {
-    gulp.watch(srcSassDir + '/**/*.scss', ['dev-sass']);
+    
 });
 
-// Default task
+
+/**
+ * default
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#default
+ */
 gulp.task('default', ['watch']);

@@ -54,7 +54,7 @@ This triggers *min-styles-less* by default. You can configure this to suit your 
 
 `$ gulp min-styles-less`
 
-Compiles and compresses the [less](http://lesscss.org/) files found in `src/less` and contatenates them into `dist/theme/css/main.css`.
+Compiles and compresses the [less](http://lesscss.org/) files found in `src/less/` and contatenates them into `dist/theme/css/main.css`.
 
 ---
 
@@ -62,7 +62,7 @@ Compiles and compresses the [less](http://lesscss.org/) files found in `src/less
 
 `$ gulp min-styles-sass`
 
-Compiles and compresses the [Sass](http://sass-lang.com/) files found in `src/less` and contatenates them into `dist/theme/css/main.css`. Listens for file `.scss` file extensions by default.
+Compiles and compresses the [Sass](http://sass-lang.com/) files found in `src/scss/` and contatenates them into `dist/theme/css/main.css`. Listens for file `.scss` file extensions by default.
 
 ---
 
@@ -78,7 +78,15 @@ This triggers *min-scripts-js* by default. You can configure this to suit your n
 
 `$ gulp min-scripts-js`
 
-Compiles and compresses the JavaScript files found in `src/js` and contatenates them into `dist/theme/js/main.js`.
+Compiles and compresses the JavaScript files found in `src/js/` and contatenates them into `dist/theme/js/main.min.js`.
+
+---
+
+### min-vendor-scripts-js
+
+`$ gulp min-vendor-scripts-js`
+
+Compiles and compresses any 3rd party vendor JavaScript files found in `src/js/vendors/` and contatenates them into `dist/theme/js/vendors.min.js`.
 
 ---
 

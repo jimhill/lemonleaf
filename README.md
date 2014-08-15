@@ -4,21 +4,21 @@ This package is designed as a quickstart environment for producing themes for [L
 
 ## Getting started
 
-Install [gulp](http://gulpjs.com/) (assuming you already have [nodejs](http://nodejs.org/) installed):
+**Step 1**: Install [gulp](http://gulpjs.com/) (assuming you already have [nodejs](http://nodejs.org/) installed):
 
 `$ npm i gulp`
 
-Install gulp dependencies:
+**Step 2**: Install gulp dependencies:
 
 `$ npm i -D gulp-util gulp-notify gulp-ruby-sass@v0.5.0 gulp-jshint gulp-concat gulp-uglify gulp-rename gulp-gzip`
 
-Start watching your files (the default gulp task - see details below):
+**Step 3**: Start watching your files (the default gulp task - see details below):
 
 `$ gulp`
 
-Create your theme as normal in the `src` directory - not forgetting to update the `README.md` and `theme.yaml` files.
+**Step 4**: Create your theme as normal in the `src` directory - not forgetting to update the `README.md` and `theme.yaml` files.
 
-When ready you can then either upload your theme files using the LemonStand backend interface (you can use the handy `$ gulp zip` task to create a zipped version of your theme. Or you use [LemonSync](https://github.com/lemonstand/lemonsync) (you can use the handy `$ gulp lemonsync-config` task to generate a `lemonsync.cfg` file).
+**Step 5**: When ready you can then either upload your theme files using the LemonStand backend interface (you can use the handy `$ gulp zip` task to create a zipped version of your theme. Or you use [LemonSync](https://github.com/lemonstand/lemonsync) (you can use the handy `$ gulp lemonsync-config` task to generate a `lemonsync.cfg` file).
 
 ## Configuring
 

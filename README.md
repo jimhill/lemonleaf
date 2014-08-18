@@ -20,7 +20,7 @@ This package is designed as a quickstart environment for producing themes for [L
 
 **Step 4**: Create your theme as normal in the `src` directory - not forgetting to update the `README.md` and `theme.yaml` files.
 
-**Step 5**: When ready you can then either upload your theme files using the LemonStand backend interface (you can use the handy `$ gulp zip` task to create a zipped version of your theme. Or you use [LemonSync](https://github.com/lemonstand/lemonsync) (you can use the handy `$ gulp lemonsync-config` task to generate a `lemonsync.cfg` file).
+**Step 5**: When ready you can then either upload your theme files using the LemonStand backend interface (you can use the handy `$ gulp zip` task to create a zipped version of your theme. Or you use [LemonSync](https://github.com/lemonstand/lemonsync) (there is an included boilerplate `lemonsync.cfg` file).
 
 ## Configuring
 
@@ -106,13 +106,6 @@ Compiles and compresses any 3rd party vendor JavaScript files found in `src/js/v
 
 When you want to compile everything into the dist folder, including fonts, images etc use this.
 
----
-
-### lemonsync-config
-
-`$ gulp lemonsync-config`
-
-This simply places a boilerplate `lemonsync.cfg` in the root directory. If you have [LemonSync](https://github.com/lemonstand/lemonsync) installed you can configure this file, run `$ [sudo] lemonsync` and by default it will listen for changes to the `dist/theme` directory using this boilerplate.
 
 ---
 

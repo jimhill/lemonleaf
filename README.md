@@ -42,6 +42,14 @@ This default action *watches* changes in files within the `src` directory and ru
 
 ---
 
+### flush
+
+`$ gulp flush`
+
+This removes all distribution files from the appropriate `dist` directories. Useful when you want to remove old files prior to a new `build`.
+
+---
+
 ### min-styles
 
 `$ gulp min-styles`

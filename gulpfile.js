@@ -14,13 +14,15 @@ var fs = require('fs'),
     path = require('path'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
+    rimraf = require('gulp-rimraf'),
     notify = require('gulp-notify'),
     less = require('gulp-less'),
     sass = require('gulp-ruby-sass'),
     jshint = require("gulp-jshint"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+    zip = require("gulp-zip");
 
 // Path config
 // ========================================================================
@@ -46,14 +48,34 @@ var scripts = [
 
 
 /**
+ * flush
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#flush
+ */
+gulp.task('flush', function(cb) {
+    return gulp.src([
+            path.join(paths.dist, 'theme' + '/pages/*'),
+            path.join(paths.dist, 'theme' + '/partials/*'),
+            path.join(paths.dist, 'theme' + '/resources/*'),
+            path.join(paths.dist, 'theme' + '/templates/*'),
+            path.join(paths.dist, 'theme' + '/README.md'),
+            path.join(paths.dist, 'theme' + '/theme.yaml')
+        ],{ read: false})
+        .pipe(rimraf( { } ));
+});
+
+
+/**
  * min-styles-less
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#min-styles-less
  */
 gulp.task('min-styles-less', function() {
     return gulp.src( path.join(paths.src, 'less', 'main.less') )
-        .pipe(less().on('error', gutil.log))
-        .pipe(rename('main.css'))
+        .pipe(less({
+            compress: true,
+        }).on('error', gutil.log))
+        .pipe(rename('main.min.css'))
         .pipe(gulp.dest( path.join(paths.dist, 'theme', 'resources', 'css') ))
         .pipe(notify('Less compiled'));
 });
@@ -66,7 +88,9 @@ gulp.task('min-styles-less', function() {
  */
 gulp.task('min-styles-sass', function() {
     return gulp.src( path.join(paths.src, 'scss', 'main.scss') )
-        .pipe(sass().on('error', gutil.log))
+        .pipe(sass({
+            style: 'compressed'
+        }).on('error', gutil.log))
         .pipe(rename('main.css'))
         .pipe(gulp.dest( path.join(paths.dist, 'theme', 'resources', 'css') ))
         .pipe(notify('Sass compiled'));
@@ -128,8 +152,34 @@ gulp.task('min-scripts', ['min-scripts-js', 'min-vendor-scripts-js']);
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#build
  */
-gulp.task('build', function() {
-    
+gulp.task('build', ['min-styles', 'min-scripts'], function() {
+    // Resource files first
+    gulp.src([
+            path.join(paths.src, '*'),
+            '!' + path.join(paths.src, 'js'),
+            '!' + path.join(paths.src, 'scss'),
+            '!' + path.join(paths.src, 'less'),
+            '!' + path.join(paths.src, 'twig'),
+            '!' + path.join(paths.src, 'README.md'),
+            '!' + path.join(paths.src, 'theme.yaml')
+        ])
+        .pipe(gulp.dest(path.join(paths.dist, 'theme', 'resources')))
+        .pipe(notify('Resources moved for distribution'));
+
+    // Twig files
+    gulp.src([
+            path.join(paths.src, 'twig', '**', '*')
+        ])
+        .pipe(gulp.dest(path.join(paths.dist, 'theme')))
+        .pipe(notify('Twig files moved for distribution'));
+
+    // Finally config files
+    return gulp.src([
+            path.join(paths.src, 'README.md'),
+            path.join(paths.src, 'theme.yaml')
+        ])
+        .pipe(gulp.dest(path.join(paths.dist, 'theme')))
+        .pipe(notify('Config and README moved for distribution'));
 });
 
 
@@ -149,7 +199,14 @@ gulp.task('lemonsync-config', function() {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#zip
  */
 gulp.task('zip', function() {
-    
+
+    return gulp.src([
+            path.join(paths.dist, 'theme', '**', '*'),
+            path.join(paths.dist, 'theme', '**', '.*')
+        ])
+        .pipe(zip('theme.zip').on('error', gutil.log))
+        .pipe(gulp.dest( paths.dist ))
+        .pipe(notify('Theme zipped'));
 });
 
 

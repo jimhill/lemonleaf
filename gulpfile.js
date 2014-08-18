@@ -184,16 +184,6 @@ gulp.task('build', ['min-styles', 'min-scripts'], function() {
 
 
 /**
- * lemonsync-config
- *
- * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#lemonsync-config
- */
-gulp.task('lemonsync-config', function() {
-    
-});
-
-
-/**
  * zip
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#zip

@@ -215,9 +215,7 @@ gulp.task('zip', function() {
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#watch
  */
-gulp.task('watch', function() {
-    
-});
+gulp.task('watch', ['min-styles', 'min-scripts']);
 
 
 /**

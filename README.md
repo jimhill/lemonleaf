@@ -1,3 +1,5 @@
+![LemonLeaf logo](https://raw.githubusercontent.com/jimhill/lemonleaf/master/lemonleaf.png "LemonLeaf")
+
 # LemonLeaf
 
 This package is designed as a quickstart environment for producing themes for [LemonStand](http://www.lemonstand.com).

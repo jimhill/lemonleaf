@@ -14,6 +14,7 @@ var fs = require('fs'),
     path = require('path'),
     gulp = require('gulp'),
     gutil = require('gulp-util'),
+    changed = require('gulp-changed'),
     rimraf = require('gulp-rimraf'),
     notify = require('gulp-notify'),
     less = require('gulp-less'),
@@ -148,32 +149,48 @@ gulp.task('min-scripts', ['min-scripts-js', 'min-vendor-scripts-js']);
 
 
 /**
+ * resources
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#resources
+ */
+gulp.task('resources', function(){
+    return gulp.src([
+        path.join(paths.src, '**', '*'),
+        '!' + path.join(paths.src, 'js'),
+        '!' + path.join(paths.src, 'scss'),
+        '!' + path.join(paths.src, 'less'),
+        '!' + path.join(paths.src, 'twig'),
+        '!' + path.join(paths.src, 'README.md'),
+        '!' + path.join(paths.src, 'theme.yaml')
+    ])
+    .pipe(gulp.dest(path.join(paths.dist, 'theme', 'resources')))
+    .pipe(notify('Resources moved for distribution'));
+});
+
+
+/**
+ * twig
+ *
+ * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#twig
+ */
+gulp.task('twig', function(){
+    return gulp.src([
+            path.join(paths.src, 'twig', '**', '*.htm')
+        ])
+        .pipe(changed(path.join(paths.dist, 'theme')))
+        .pipe(gulp.dest(path.join(paths.dist, 'theme')))
+        .pipe(notify('Twig files moved for distribution'));
+});
+
+
+/**
  * build
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#build
  */
-gulp.task('build', ['min-styles', 'min-scripts'], function() {
-    // Resource files first
-    gulp.src([
-            path.join(paths.src, '**', '*'),
-            '!' + path.join(paths.src, 'js'),
-            '!' + path.join(paths.src, 'scss'),
-            '!' + path.join(paths.src, 'less'),
-            '!' + path.join(paths.src, 'twig'),
-            '!' + path.join(paths.src, 'README.md'),
-            '!' + path.join(paths.src, 'theme.yaml')
-        ])
-        .pipe(gulp.dest(path.join(paths.dist, 'theme', 'resources')))
-        .pipe(notify('Resources moved for distribution'));
+gulp.task('build', ['min-styles', 'min-scripts', 'resources', 'twig'], function() {
 
-    // Twig files
-    gulp.src([
-            path.join(paths.src, 'twig', '**', '*.htm')
-        ])
-        .pipe(gulp.dest(path.join(paths.dist, 'theme')))
-        .pipe(notify('Twig files moved for distribution'));
-
-    // Finally config files
+    // Finally move config files
     return gulp.src([
             path.join(paths.src, 'README.md'),
             path.join(paths.src, 'theme.yaml')
@@ -205,7 +222,19 @@ gulp.task('zip', function() {
  *
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#watch
  */
-gulp.task('watch', ['min-styles', 'min-scripts']);
+gulp.task('watch', function() {
+    gulp.watch([
+        path.join(paths.src, 'less', '**', '*.less'),
+        path.join(paths.src, 'scss', '**', '*.scss'),
+        path.join(paths.src, 'js', '**', '*.js'),
+        path.join(paths.src, 'twig', '**', '*.htm')
+    ], 
+    [
+        'min-styles', 
+        'min-scripts',
+        'twig'
+    ]);
+});
 
 
 /**

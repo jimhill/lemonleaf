@@ -155,7 +155,7 @@ gulp.task('min-scripts', ['min-scripts-js', 'min-vendor-scripts-js']);
 gulp.task('build', ['min-styles', 'min-scripts'], function() {
     // Resource files first
     gulp.src([
-            path.join(paths.src, '*'),
+            path.join(paths.src, '**', '*'),
             '!' + path.join(paths.src, 'js'),
             '!' + path.join(paths.src, 'scss'),
             '!' + path.join(paths.src, 'less'),

@@ -110,7 +110,7 @@ This moves all resources into the dist directory.
 
 ### twig
 
-`$ gulp resources`
+`$ gulp twig`
 
 This moves all twig files into the dist directory.
 

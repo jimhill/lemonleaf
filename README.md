@@ -100,6 +100,22 @@ Compiles and compresses any 3rd party vendor JavaScript files found in `src/js/v
 
 ---
 
+### resources
+
+`$ gulp resources`
+
+This moves all resources into the dist directory.
+
+---
+
+### twig
+
+`$ gulp resources`
+
+This moves all twig files into the dist directory.
+
+---
+
 ### build
 
 `$ gulp build`

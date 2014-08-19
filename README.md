@@ -12,7 +12,7 @@ This package is designed as a quickstart environment for producing themes for [L
 
 **Step 2**: Install gulp dependencies:
 
-`$ npm i -D gulp-util gulp-rimraf gulp-notify gulp-less gulp-ruby-sass@v0.5.0 gulp-jshint gulp-concat gulp-uglify gulp-rename gulp-zip`
+`$ npm i -D gulp-util gulp-changed gulp-rimraf gulp-notify gulp-less gulp-ruby-sass@v0.5.0 gulp-jshint gulp-concat gulp-uglify gulp-rename gulp-zip`
 
 **Step 3**: Start watching your files (the default gulp task - see details below):
 

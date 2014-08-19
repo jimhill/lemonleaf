@@ -168,7 +168,7 @@ gulp.task('build', ['min-styles', 'min-scripts'], function() {
 
     // Twig files
     gulp.src([
-            path.join(paths.src, 'twig', '**', '*')
+            path.join(paths.src, 'twig', '**', '*.htm')
         ])
         .pipe(gulp.dest(path.join(paths.dist, 'theme')))
         .pipe(notify('Twig files moved for distribution'));

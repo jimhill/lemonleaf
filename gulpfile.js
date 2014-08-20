@@ -155,14 +155,17 @@ gulp.task('min-scripts', ['min-scripts-js', 'min-vendor-scripts-js']);
  */
 gulp.task('resources', function(){
     return gulp.src([
-        path.join(paths.src, '**', '*'),
-        '!' + path.join(paths.src, 'js'),
-        '!' + path.join(paths.src, 'scss'),
-        '!' + path.join(paths.src, 'less'),
-        '!' + path.join(paths.src, 'twig'),
-        '!' + path.join(paths.src, 'README.md'),
-        '!' + path.join(paths.src, 'theme.yaml')
+        '!' +  paths.src + '/{bower_components,bower_components/**}',
+        '!' +  paths.src + '/{js,js/**}',
+        '!' +  paths.src + '/{scss,scss/**}',
+        '!' +  paths.src + '/{less,less/**}',
+        '!' +  paths.src + '/{twig,twig/**}',
+        '!' +  paths.src + '/bower.json',
+        '!' +  paths.src + '/README.md',
+        '!' +  paths.src + '/theme.yaml',
+        path.join(paths.src, '**', '*')
     ])
+    .pipe(changed(path.join(paths.dist, 'theme', 'resources')))
     .pipe(gulp.dest(path.join(paths.dist, 'theme', 'resources')))
     .pipe(notify('Resources moved for distribution'));
 });

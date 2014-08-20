@@ -226,17 +226,23 @@ gulp.task('zip', function() {
  * @see https://github.com/jimhill/lemonleaf/blob/master/README.md#watch
  */
 gulp.task('watch', function() {
+    
+    // Styles
     gulp.watch([
         path.join(paths.src, 'less', '**', '*.less'),
-        path.join(paths.src, 'scss', '**', '*.scss'),
-        path.join(paths.src, 'js', '**', '*.js'),
+        path.join(paths.src, 'scss', '**', '*.scss')
+    ], ['min-styles']);
+
+    // Scripts
+    gulp.watch([
+        path.join(paths.src, 'less', '**', '*.js')
+    ], ['min-scripts']);
+
+    // Scripts
+    gulp.watch([
         path.join(paths.src, 'twig', '**', '*.htm')
-    ], 
-    [
-        'min-styles', 
-        'min-scripts',
-        'twig'
-    ]);
+    ], ['twig']);
+
 });
 
 
